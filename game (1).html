@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cute Heart Game 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      text-align: center;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #fff;
+      font-size: 2.2rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    #score, #timer {
+      font-size: 1.3rem;
+      color: #fff;
+      margin: 8px 0;
+    }
+
+    .item {
+      position: absolute;
+      cursor: pointer;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-120px); }
+    }
+
+    .surprise-btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #ff6a88, #ff99ac);
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.2s, opacity 0.3s;
+    }
+
+    .surprise-btn.active {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .surprise-btn:hover.active {
+      transform: translateX(-50%) scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 Catch the Hearts, Avoid the Broken Ones 💔</h1>
+  <p id="timer">Time Left: 30s</p>
+  <p id="score">Score: 0</p>
+
+  <button id="surpriseBtn" class="surprise-btn" disabled>For Surprise 🎁</button>
+
+  <script>
+    let score = 0;
+    let timeLeft = 30;
+    let gameInterval;
+    let timerInterval;
+    let brokenHeartClicked = false; // agar 💔 touch hua to true
+
+    function createItem() {
+      const item = document.createElement("div");
+      item.classList.add("item");
+
+      // Randomly decide kya aayega
+      const rand = Math.random();
+      if (rand < 0.7) {
+        item.innerHTML = "❤️"; 
+        item.dataset.value = 1;
+      } else if (rand < 0.9) {
+        item.innerHTML = "⭐"; 
+        item.dataset.value = 3;
+      } else {
+        item.innerHTML = "💔"; 
+        item.dataset.value = -2;
+      }
+
+      // Random position & size
+      item.style.left = Math.random() * (window.innerWidth - 40) + "px";
+      const size = 25 + Math.random() * 35;
+      item.style.fontSize = size + "px";
+
+      // Random speed
+      const duration = 3 + Math.random() * 4;
+      item.style.animationDuration = duration + "s";
+
+      function catchItem() {
+        let value = parseInt(item.dataset.value);
+        score += value;
+        if (score < 0) score = 0;
+        document.getElementById("score").innerText = "Score: " + score;
+
+        if (value < 0) {
+          brokenHeartClicked = true; // 💔 touch hua
+          alert("💔 Oops! Tumne mera dil tod diya...\nAb dobara game khelna padega 😘");
+        }
+
+        item.remove();
+      }
+
+      item.addEventListener("click", catchItem);
+      item.addEventListener("touchstart", catchItem);
+
+      document.body.appendChild(item);
+
+      setTimeout(() => {
+        item.remove();
+      }, duration * 1000);
+    }
+
+    function startGame() {
+      gameInterval = setInterval(createItem, 900);
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      timeLeft--;
+      document.getElementById("timer").innerText = "Time Left: " + timeLeft + "s";
+
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+      document.getElementById("timer").innerText = "⏰ Time's Up!";
+      alert("💖 Game Over! Your Final Score: " + score);
+
+      // Surprise button hamesha dikhega
+      const btn = document.getElementById("surpriseBtn");
+      btn.disabled = false;
+      btn.classList.add("active");
+
+      if (brokenHeartClicked) {
+        // Agar 💔 touch hua to dobara game par bhejo
+        btn.addEventListener("click", () => {
+          alert("❌ Surprise Locked!\n👉 Tumhe dobara game khelna hoga dil jeetne ke liye 💖");
+          window.location.reload(); // game firse start hoga
+        });
+      } else {
+        // Agar 💔 touch nahi hua to surprise open hoga
+        btn.addEventListener("click", goToSurprise);
+      }
+    }
+
+    function goToSurprise() {
+      window.location.href = "Gaurav.html";
+    }
+
+    startGame();
+  </script>
+</body>
+</html>

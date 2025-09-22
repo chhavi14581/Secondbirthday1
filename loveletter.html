@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Letter ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: #333;
+      line-height: 1.9em;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(255, 230, 240, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff1744;
+      margin-bottom: 25px;
+    }
+    
+    p {
+      text-align: justify;
+      font-size: 18px;
+      color: #222;
+    }
+
+    .next-btn {
+      display: block;
+      margin: 40px auto 10px;
+      padding: 15px 45px;
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(to right, #ff4b6e, #ff8a73);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(to right, #ff1744, #ff6f61);
+    }
+    
+    /* Date-Time Style */
+    #timer {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #d81b60;
+      margin-top: 15px;
+    }
+
+    /* Music button */
+    .music-btn {
+      display: block;
+      margin: 10px auto 30px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .music-btn:hover {
+      background: #e91e63;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: rgba(255, 0, 100, 0.9);
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    /* ✅ Anchor underline remove */
+    a {
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden Audio -->
+  <audio id="bgMusic" loop>
+    <source src="Music/Chhavi2.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Music Control Button -->
+  <button class="music-btn" id="musicBtn">▶️ Play Music</button>
+
+  <div class="container">
+    <h1>My Endless Love Letter 💌</h1>
+    <p id="letter"></p>
+
+    <!-- ✅ Fixed Next Page Link (no underline) -->
+    <a href="Someone.html" target="_parent">
+      <button class="next-btn">Open Next Surprise ➡️</button>
+    </a>
+    
+    <!-- Real Time Date and Clock under Next Button -->
+    <div id="timer">Loading date & time...</div>
+  </div>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicBtn");
+    let isPlaying = false;
+
+    btn.addEventListener("click", () => {
+      if (!isPlaying) {
+        music.play().then(() => {
+          isPlaying = true;
+          btn.textContent = "⏸ Pause Music";
+        }).catch(err => {
+          console.log("Music play blocked:", err);
+        });
+      } else {
+        music.pause();
+        isPlaying = false;
+        btn.textContent = "▶️ Play Music";
+      }
+    });
+
+    // Floating hearts animation
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 700);
+    
+    // 🌸 Days + Hours + Minutes + Seconds since website started
+    const startDate = new Date(2025, 8, 28); // यहाँ अपनी website launch date डालो (YYYY, MM-1, DD)
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("timer").textContent =
+        "🌸 हमारी वेबसाइट को बने हुए " +
+        days + " दिन " +
+        hours + " घंटे " +
+        minutes + " मिनट " +
+        seconds + " सेकंड ❤️";
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+
+<script>
+  const letterText = `Hey Chhavi,<br><br>
+Aur Kaisi ho Chhavi<br/>
+मुझे पता है तुम अपना ध्यान रख सकती हो फिर भी मुझे Take Care बोलना अच्छा लगता है <br/>
+पहले हमारा रिश्ता कितना अच्छा था तुम मुझे हर चीज बताती थी लेकिन छवि मैं अब तुम्हारे लिए इतना गैर हो चुका हु कि तुम मुझे कुछ भी नहीं बताती हो 
+<br><br>
+
+मुझे अब तुम्हारे बारे जो भी पता चलता है वो jays और vineeta से पता चलता है यार
+मैं क्या करूं छवि की तुम हमेशा मेरी हो जाओ और मुझे बहुत जलन होती है यार तुम्हारे दोस्तों से क्योंकि वो सब तुम्हारे पास है सिर्फ मैं ही तुमसे दूर हो गया हु <br><br> 
+मैं भी चाहता हु यार दूसरों की तरह तुम्हारे साथ वक्त बिताना, तुम्हारे साथ घूमना, कही भी जाना 
+तुम्हारे साथ कही date पर जाने को नहीं कह रहा हु मुझे बस तुम्हारे साथ हर मंदिर घूमना था या तुम्हारे साथ खाटू श्याम जाना था लेकिन तुम पहले ही घूम कर चली आई 
+तुमसे मिलने का बहुत मन करता है पर तुम मिलना नहीं चाहती मैं क्या करु छवि तुम्ही बताओ मैं अपना 100% दे रहा हु इस रिश्ते को बचाने के लिए लेकिन शायद किस्मत को ये मंजूर नहीं है 
+मैं भी धीरे धीरे समझ गया हु छवि की तुम अब मेरी लाइफ से जा चुकी हो और मैं चाहकर कर भी नहीं रोकूंगा छवि 
+अब से तुम हमेशा जैसे मन करे वैसे जीना क्योंकि अब मैं नहीं रहूंगा तुम्हारा साथ देने के लिए ये तुम्हारे लिए मेरा लास्ट लव लेटर क्योंकि अब मैं नहीं रहूंगा और न ही मैसेज करूंगा क्योंकि कहते है न छवि कोई एक समय तक ही किसी के पीछे भाग सकता है अब मैं थक गया हु छवि अब मैं हमेशा शांत रहूंगा 
+<br><br>
+
+Tumhare liye Last shayari par maine nhi banaya hai <br/> 
+काजल लगाया करो आंखों में वो नजर से बचाएगा तुम्हे<br/>
+वही काजल आंखों का और भी खूबसूरत बनाएगा तुम्हे<br/>
+तुम बस ख्वाइश करो जिंदगी में कुछ भी - 2<br/>
+तारा खुद टूटकर बताएगा तुम्हे<br><br>
+
+"कि जो शख्स इस दिल में बस्ती है<br/>
+वो कुछ भी पहन ले उसमें जचती है <br/>
+और मेरी धड़कन रुक जाती है उस एक पल को <br/>
+जब भी वो मेरी तरफ देख के हस्ती है<br/>
+और कमबख्त क्या खुशनसीब है उस आईने के <br/>
+जिसके सामने वो रोज सजती है "<br><br>
+
+My love, if words could hold all that I feel for you, the universe itself would not be enough space.  
+I love you beyond the stars, beyond time, beyond life itself. You are my today, my tomorrow,  
+and my forever. <br><br>
+
+Always yours,<br>
+The one who loves you endlessly. ❤️`;
+
+  let i = 0;
+  function typeLetter() {
+    if (i < letterText.length) {
+      if (letterText.slice(i, i+4) === "<br>") {
+        document.getElementById("letter").innerHTML += "<br>";
+        i += 4;
+      } else if (letterText.slice(i, i+5) === "<br/>") {
+        document.getElementById("letter").innerHTML += "<br/>";
+        i += 5;
+      } else {
+        document.getElementById("letter").innerHTML += letterText.charAt(i);
+        i++;
+      }
+      setTimeout(typeLetter, 40); 
+    }
+  }
+  typeLetter();
+</script>
+</body>
+</html>
