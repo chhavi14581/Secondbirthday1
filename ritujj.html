@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 💖</title>
+<style>
+/* ===== Body & Animated Gradient Background ===== */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(270deg, #800080, #0000ff);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  transition: background 1s;
+}
+
+@keyframes gradientFlow {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+/* ===== Heart Particle Background ===== */
+.heart {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: pink;
+  transform: rotate(45deg);
+  animation: float 7s linear infinite;
+  z-index: 0;
+}
+
+.heart:before,
+.heart:after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: pink;
+  border-radius: 50%;
+}
+
+.heart:before { top: -5px; left: 0;}
+.heart:after { left: 5px; top: 0;}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-1000px) rotate(45deg); opacity: 0; }
+}
+
+/* ===== Gallery Card ===== */
+.card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(50,50,50,0.7)); 
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    margin: 15px;
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 1;
+    color: #fff;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.card img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  transition: transform 0.5s;
+}
+
+.card:hover img { transform: scale(1.1); }
+
+.quote {
+    padding: 15px;
+    font-style: italic;
+    font-weight: bold;
+    color: #fff; 
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); 
+    font-size: 16px;
+}
+
+/* ===== Buttons ===== */
+#musicBtn, #nextBtn {
+  position: fixed;
+  padding: 12px 22px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s, background 0.3s;
+}
+
+#musicBtn { bottom: 20px; left: 20px; background: linear-gradient(270deg, #8000ff, #0077ff, #ff0080, #00ffcc);;}
+#musicBtn:hover { transform: scale(1.1); }
+
+#nextBtn { bottom: 20px; right: 20px; background: linear-gradient(270deg, #8000ff, #f7971e, #dd2476, #00ffcc);}
+#nextBtn:hover { transform: scale(1.1); background: #800; }
+
+/* ===== Video Modal ===== */
+#videoModal {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+#videoModal video {
+  width: auto;
+  height: 90%;
+  aspect-ratio: 9 / 16;
+  border-radius: 15px;
+  background: black;
+}
+
+#closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 35px;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width:600px){
+  .card { width:80%; }
+  #videoModal video { height:80%; }
+}
+
+photo-location {
+  margin: 5px 0 0 0;       /* top 5px, bottom 0 */
+  font-size: 14px;
+  color: #e0e0e0;          /* thoda lighter text */
+  font-style: italic;       /* italic style */
+  text-align: center;       /* center me show ho */
+}
+</style>
+</head>
+<body>
+
+<!-- Buttons -->
+<button id="musicBtn">Pause Music</button>
+<button id="nextBtn">Next Surprise 🎁</button>
+
+<!-- Gallery Cards -->
+<div class="card" data-video="Video/Chhavi2.mp4" data-theme="#ff33cc,#0000ff">
+  <img src="img/Chhavi2.jpg" alt="Love Image 1">
+  <div class="quote">"Teri Ankhon ke Samne Ye Sahar Kon Dekhega <br> Tu Dariya Si hai Ye Lahar Kon Dekhega <br>
+  Tu Khubsurat Se bhi Jayda Khubsurat Hai<br> Tujhe Dekhne ke baad ye Tajmahal Kon Dekhega💖" <p class="photo-location">Manali— 2024</p>
+  </div>
+</div>
+<div class="card" data-video="Video/Chhavi3.mp4" data-theme="#ff33cc,#6600ff">
+  <img src="img/Chhavi20.jpg" alt="Love Image 2">
+  <div class="quote">""काजल लगया करो आँखों में वो नजर से बचेंगे तुम्हें <br>
+वही काजल आँखों को और भी खुबसूरत बनाएगा तुम्हें <br>
+तुम बस ख्वाहिश करो जिंदगी में कुछ भी -2 <br>
+तारा खुद आसमान से टूट कर बताएगा तुम्हें" ✨"</div>
+  <p class="photo-location">📍 Delhi — 2025</p>
+</div>
+<div class="card" data-video="Video/Chhavi6.mp4" data-theme="#9933ff,#33ccff">
+  <img src="img/Chhavi15.jpg" alt="Love Image 3">
+  <div class="quote">"उसे देखते ही चेहरा कुछ यू खिल जाता है <br>
+की जैसे उसके होने मुझे सब कुछ मिल जाता है <br
+और कैसे बताऊं कि तुम क्या हो मेरे लिए <br>
+तुम्हे एक बार देख लू तो मेरा पूरा दिन बन जाता है 😊"</div>
+  <p class="photo-location">📍Your Birthday  — 2024</p>
+</div>
+<div class="card" data-video="Video/Chhavi7.mp4" data-theme="#ff6699,#0066ff">
+  <img src="img/Chhavi16.jpg" alt="Love Image 4">
+  <div class="quote">"Sayad kismat ka bhi yahi sitara tha <br>
+Aur tumko bhi akhir yahi gawara tha <br>
+Maine to wo khoya jo mera tha hi nhi <br>
+Tumne wo kho diya jo sirf tumhara tha 😞"</div>
+  <p class="photo-location">📍Vineeta Birthday — 2022</p>
+</div>
+<div class="card" data-video="Video/Chhavi9.mp4" data-theme="#ff6699,#0066ff">
+  <img src="img/Chhavi17.jpg" alt="Love Image 4">
+  <div class="quote">"Jo Har Roj Baat Kiya Karte the wo ab Phone bhi nhi Karte <br>
+Jo Har Roj Phone kiya karte wo ab Message bhi nhi karte <br>
+Kya kahu unke baare mein <br>
+Jo har roj Message Kiya karte wo ab Yaad bhi nhi karte 😳"</div>
+  <p class="photo-location">📍Jama Masjid — 2025</p>
+</div>
+<div class="card" data-video="Video/Chhavi5.mp4" data-theme="#ff6699,#0066ff">
+  <img src="img/Chhavi10.jpg" alt="Love Image 4">
+  <div class="quote">"ऐसी कोई रात नहीं होती कि जब तुम्हारी याद नहीं होती <br> टूट जाता हूं मैं जब खुशी होती और मोहब्बत साथ नहीं होती <br>
+  अजीब कश्मकश है दायरे की <br>बात तो होती है लेकिन मुलाकात नहीं होती 🤗"</div>
+  <p class="photo-location">📍 Manali — 2023</p>
+</div>
+
+<div class="card" data-video="Video/Chhavi4.mp4" data-theme="#ff6699,#0066ff">
+  <img src="img/Chhavi19.jpg" alt="Love Image 4">
+  <div class="quote">"Dil ka har dard ab gehra hota jaa raha hai, <br> Zindagi ka har lamha tanha hota jaa raha hai.
+<br>
+Kabhi socha tha milegi khushiyan hume bhi,<br> Magar ab har khwaab adhura hota jaa raha hai..."</div>
+  <p class="photo-location">📍 Manali — 2025</p>
+</div>
+
+<div class="card" data-video="Video/Chhavi1.mp4" data-theme="#ff6699,#0066ff">
+  <img src="img/Chhavi12.jpg" alt="Love Image 4">
+  <div class="quote">"Chhavi Kash Tum Chand mai Sitara Hita <br> Aasman Mein ek Asiyana Hamara Hota <br>
+  Ki Log Tumhe Bas Door Se Dekhte - 2 <br> Paas Dekhne Ka Haq Bas Hamara Hota 🌸"</div>
+  <p class="photo-location">📍 Delhi Cenima — 2024</p>
+</div>
+
+<div class="card" data-video="Video/Chhavi8.mp4" data-theme="#ff6699,#0066ff">
+  <img src="img/Chhavi21.jpg" alt="Love Image 4">
+  <div class="quote">" की जो सख्श इस दिल में बस्ती है <br> वो कुछ भी पहन ले उसमें जचती है<br> और मेरी धड़कन रुक जाती उस एक पल को <br> जब भी वो मेरे सामने साड़ी पहन कर आती है <br> कमबख्त क्या खुशनसीब है उस आईने के <br> जिसके सामने वो रोज सजती है 🌸"</div>
+  <p class="photo-location">📍 Bansi — 2025</p>
+</div>
+
+<!-- Video Modal -->
+<div id="videoModal">
+  <span id="closeBtn">&times;</span>
+  <video id="videoPlayer" controls></video>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop autoplay>
+  <source src="Music/Chhavi1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ===== Heart Particles ===== */
+const numHearts = 30;
+for(let i=0;i<numHearts;i++){
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random()*100+'vw';
+  heart.style.animationDuration = (5+Math.random()*5)+'s';
+  heart.style.width = 8+Math.random()*12+'px';
+  heart.style.height = heart.style.width;
+  document.body.appendChild(heart);
+}
+
+/* ===== Elements ===== */
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+const cards = document.querySelectorAll('.card');
+const videoModal = document.getElementById('videoModal');
+const videoPlayer = document.getElementById('videoPlayer');
+const closeBtn = document.getElementById('closeBtn');
+const nextBtn = document.getElementById('nextBtn');
+const body = document.body;
+
+let defaultGradient = getComputedStyle(body).background;
+
+/* ===== Music Button ===== */
+musicBtn.addEventListener('click',()=>{
+  if(bgMusic.paused){ bgMusic.play(); musicBtn.textContent="Pause Music";}
+  else{ bgMusic.pause(); musicBtn.textContent="Play Music";}
+});
+
+/* ===== Video Click ===== */
+cards.forEach(card=>{
+  card.addEventListener('click',()=>{
+    bgMusic.pause();
+    musicBtn.textContent="Play Music";
+    const videoSrc = card.dataset.video;
+    videoPlayer.src = videoSrc;
+    videoModal.style.display='flex';
+    videoPlayer.play();
+    // Change background theme
+    const theme = card.dataset.theme.split(',');
+    body.style.background = `linear-gradient(270deg, ${theme[0]}, ${theme[1]})`;
+  });
+});
+
+function getRandomGradient() {
+  const gradients = [
+    ["#ff33cc","#33ccff","#ffcc00"],
+    ["#ff6600","#ff33ff","#33ffcc"],
+    ["#9933ff","#33ffcc","#ff6666"],
+    ["#33ff99","#6600ff","#ff3399"],
+    ["#ff0066","#00ccff","#ffff66"],
+    ["#cc33ff","#ffcc33","#33ff66"],
+    ["#ff3399","#33cc66","#3399ff"]
+  ];
+  return gradients[Math.floor(Math.random()*gradients.length)];
+}
+
+closeBtn.addEventListener('click',()=>{
+  videoPlayer.pause();
+  videoModal.style.display='none';
+
+  // Resume music
+  bgMusic.play();
+  musicBtn.textContent="Pause Music";
+
+  // Multi-color flowing gradient theme
+  const gradient = getRandomGradient();
+  body.style.background = `linear-gradient(270deg, ${gradient.join(",")})`;
+  body.style.backgroundSize = "600% 600%";
+  body.style.animation = "gradientFlow 15s ease infinite";
+});
+
+/* ===== Next Surprise Button ===== */
+nextBtn.addEventListener('click',()=>{
+  window.location.href='lovestory.html'; // Replace with your second page
+});
+</script>
+</body>
+</html>
